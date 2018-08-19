@@ -5,6 +5,7 @@ numpy==1.14.3
 pandas==0.22.0
 scipy==1.1.0
 seaborn==0.9.0
+Cython==0.28.5
 
 
 ##### Machine Learning packages
