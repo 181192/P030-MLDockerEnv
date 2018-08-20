@@ -1,0 +1,22 @@
+version: '3'
+services:
+  ml:
+    image: 181192/ml:cpu
+    ipc: host
+    ports:
+      - '8888:8888'
+      - '6006:6006'
+    volumes:
+     - ${WORK_DIR}:/root
+    command: jupyter lab --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
+    restart: always
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - ml
+
+networks:
+  ml:
+    driver: bridge
