@@ -7,8 +7,8 @@ services:
       - '8888:8888'
       - '6006:6006'
     volumes:
-     - ${WORK_DIR}:/root
-    command: jupyter lab --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
+     - ${WORK_DIR}:${WORK_DIR}
+    command: jupyter lab --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='${WORK_DIR}'
     restart: always
     deploy:
       replicas: 1
