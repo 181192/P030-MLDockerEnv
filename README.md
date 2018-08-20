@@ -22,7 +22,7 @@ caffe | latest (git)
 caffe2 | latest (git)
 
 ## Setup
-Pull image from dockerhub. Either the CPU only version or the GPU version.
+Pull image from [dockerhub](https://hub.docker.com/r/181192/ml/). Either the CPU only version or the GPU version.
 The GPU version requires a CUDA compatible Nvidia GPU and is *only supported on
 Linux computers*. The CPU version can be runned on everything that has Docker
 installed (Linux, macOS and Windows).
@@ -113,4 +113,41 @@ docker run --rm -it -p 8888:8888 --ipc=host -v /your-dir:/root/your-dir 181192/m
 For running GPU version you will need `nvidia-docker` installed, installation guide [here](https://github.com/NVIDIA/nvidia-docker):
 ```bash
 nvidia-docker run --rm -it -p 8888:8888 --ipc=host -v /your-dir:/root/your-dir 181192/ml:gpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
+```
+
+## Further development and customization
+You can modify the Dockerfile's as you want and remove and add packages. If you
+want to add some python packages the easiest is to add them to the `requirements.txt`
+file.
+
+Clone GitHub repository:
+```bash
+git clone https://github.com/181192/P030-MLDockerEnv
+```
+
+To build and tag the image you can do the following:
+```bash
+docker build -f Dockerfile.cpu -t ml:cpu .
+```
+Where the `-f` flag is specifying the Dockerfile you want to build. And the `-t`
+flag is specifying the tag for the image `name:tag`.
+
+The building process of this current build will take over an hour to complete,
+and even longer with the GPU libraries.
+
+To push to your own dockerhub account you can to the following:
+
+Login to Docker Cloud
+```bash
+docker login
+```
+Tag your image, replace `my_image:tag` with your image's name and optional tag,
+and replace `$DOCKER_ID_USER` with your Docker Cloud username if needed.
+```bash
+docker tag my_image:tag $DOCKER_ID_USER/my_image:tag
+```
+
+Finally, push your image to Docker Cloud
+```bash
+docker push $DOCKER_ID_USER/my_image:tag
 ```
