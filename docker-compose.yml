@@ -3,6 +3,7 @@ services:
   ml:
     image: 181192/ml:cpu
     ipc: host
+    network_mode: host
     ports:
       - '8888:8888'
       - '6006:6006'
