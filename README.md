@@ -80,7 +80,7 @@ jupyter="$(jupyter lab --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.toke
 volume=${1:-"$(pwd)/notebook"}
 start=${2:-$jupyer}
 
-docker run --rm -it -p 8888:8888 --ipc=host -v $volume:/root 181192/ml:cpu $start
+docker run --rm -it -p 8888:8888 --ipc=host --net=host -v $volume:/root 181192/ml:cpu $start
 ```
 If the parameters is not set the mounted volume will be a folder named `notebook`
 located in the folder you start the script from. And then it would lauch Jupyter
@@ -101,18 +101,18 @@ to start a Jupyter Notebook or a Jupyter Lab you can run the following command:
 Replace notebook with `lab` to start jupyterlab.
 
 ```bash
-docker run --rm -it -p 8888:8888 --ipc=host 181192/ml:cpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
+docker run --rm -it -p 8888:8888 --ipc=host --net=host 181192/ml:cpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
 ```
 
 Or if you want to share a volume so your work can be saved.
 
 ```bash
-docker run --rm -it -p 8888:8888 --ipc=host -v /your-dir:/root/your-dir 181192/ml:cpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
+docker run --rm -it -p 8888:8888 --ipc=host --net=host -v /your-dir:/root/your-dir 181192/ml:cpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
 ```
 
 For running GPU version you will need `nvidia-docker` installed, installation guide [here](https://github.com/NVIDIA/nvidia-docker):
 ```bash
-nvidia-docker run --rm -it -p 8888:8888 --ipc=host -v /your-dir:/root/your-dir 181192/ml:gpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
+nvidia-docker run --rm -it -p 8888:8888 --ipc=host --net=host -v /your-dir:/root/your-dir 181192/ml:gpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
 ```
 
 ## Further development and customization
