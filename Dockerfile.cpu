@@ -1,5 +1,7 @@
 FROM ubuntu:16.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 COPY requirements.txt requirements.txt
 
 RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
@@ -16,7 +18,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
 # tools
 # ------------------------------------------------------------------
 
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    $APT_INSTALL \
         build-essential \
         ca-certificates \
         cmake \
@@ -29,12 +31,12 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
 # python
 # ------------------------------------------------------------------
 
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    $APT_INSTALL \
         software-properties-common \
         && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    $APT_INSTALL \
         python3.6 \
         python3.6-dev \
         && \
@@ -69,7 +71,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
           .. && \
     make -j"$(nproc)" install && \
 
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    $APT_INSTALL \
         libjpeg-dev \
         libpng-dev \
         libreadline-dev \
@@ -112,7 +114,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
 # cntk
 # ------------------------------------------------------------------
 
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    $APT_INSTALL \
         openmpi-bin \
         libpng-dev \
         libtiff-dev \
@@ -136,7 +138,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
 # mxnet
 # ------------------------------------------------------------------
 
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    $APT_INSTALL \
         libatlas-base-dev \
         graphviz \
         && \
@@ -167,7 +169,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
 # theano
 # ------------------------------------------------------------------
 
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    $APT_INSTALL \
         libblas-dev \
         && \
 
@@ -189,7 +191,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
 # opencv
 # ------------------------------------------------------------------
 
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    $APT_INSTALL \
         libatlas-base-dev \
         libgflags-dev \
         libgoogle-glog-dev \
@@ -255,7 +257,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
 # caffe2
 # ------------------------------------------------------------------
 
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    $APT_INSTALL \
         libprotobuf-dev \
         protobuf-compiler \
         && \
