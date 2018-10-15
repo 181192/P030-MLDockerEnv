@@ -1,6 +1,18 @@
 # P030-MLDockerEnv
 A Docker Machine Learning Python enviroment.
 
+## Index
+- [Module list](https://github.com/181192/P030-MLDockerEnv#module-list)
+- [Setup](https://github.com/181192/P030-MLDockerEnv#setup)
+- [How to run](https://github.com/181192/P030-MLDockerEnv#how-to-run)
+  - [First option - `docker run`](https://github.com/181192/P030-MLDockerEnv#first-option---docker-run)
+  - [Second option - `docker-compose up`](https://github.com/181192/P030-MLDockerEnv#second-option---docker-compose-up)
+  - [Third option - `./start.sh`](https://github.com/181192/P030-MLDockerEnv#third-option---startsh)
+- [Running Jupyter Notebook or Jupyter Lab](https://github.com/181192/P030-MLDockerEnv#running-jupyter-notebook-or-jupyter-lab)
+- [Further development and customization](https://github.com/181192/P030-MLDockerEnv#further-development-and-customization)
+- [GPU support for xgboost](https://github.com/181192/P030-MLDockerEnv#gpu-support-for-xgboost)
+
+
 ## Module list
 Module | Version
 --- | ---
@@ -94,7 +106,7 @@ To run it with default values just run:
 ./start.sh
 ```
 
-### Running Jupyter Notebook or Jupyter Lab
+## Running Jupyter Notebook or Jupyter Lab
 You now have a lot of options to do with our amazing container that contains
 everything you need to be a real *scientific machine learning programmer*, etc.
 to start a Jupyter Notebook or a Jupyter Lab you can run the following command:
@@ -151,3 +163,50 @@ Finally, push your image to Docker Cloud
 ```bash
 docker push $DOCKER_ID_USER/my_image:tag
 ```
+## GPU support for xgboost
+For now I have not updated the GPU image with an xgboost GPU build. It depends on the architecture of the GPU 
+when you compile it. I may update it later and add a requirement to have a 10** series of Nvidia.
+
+When the container is running run:
+```
+docker exec -it nameOfTheContainer bash
+```
+If you don't know the name of the container run `docker container ls` to get all running containers.
+
+While inside the bash shell of the running container uninstall xgboost.
+```
+pip remove xgboost
+```
+Clone the xgboost binaries from github.
+```
+git clone --recursive https://github.com/dmlc/xgboost
+git submodule init
+git submodule update
+```
+Enter the project folder
+```
+cd xgboost 
+```
+Make a build directory and enter it.
+```
+mkdir build
+cd build
+```
+Then run CMake as follows with the `-D` flag `USE_CUDA=ON` enabled.
+```
+cmake .. -DUSE_CUDA=ON
+```
+Compile it by running.
+```
+make -j4
+```
+Then exit the docker container
+```
+exit
+```
+And commit your changes to the image and tag it.
+```
+docker commit 181192:gpu
+```
+There, you shall now have compiled xgboost and commited your changes to the docker image and tagged it.
+You can know stop the container and restart it again as you please because the state is saved.
