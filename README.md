@@ -126,6 +126,10 @@ For running GPU version you will need `nvidia-docker` installed, installation gu
 ```bash
 nvidia-docker run --rm -it -p 8888:8888 --ipc=host --net=host -v /your-dir:/root/your-dir 181192/ml:gpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
 ```
+Or just pass along `--runtime=nvidia` then you don't need `nvidia-docker`:
+```bash
+docker run --rm -it -p 8888:8888 --runtime=nvidia --ipc=host --net=host -v /your-dir:/root/your-dir 181192/ml:gpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
+```
 
 ## Further development and customization
 You can modify the Dockerfile's as you want and remove and add packages. If you
