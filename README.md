@@ -175,7 +175,7 @@ If you don't know the name of the container run `docker container ls` to get all
 
 While inside the bash shell of the running container uninstall xgboost.
 ```
-pip remove xgboost
+pip uninstall xgboost
 ```
 Clone the xgboost binaries from github.
 ```
@@ -206,7 +206,7 @@ exit
 ```
 And commit your changes to the image and tag it.
 ```
-docker commit 181192:gpu
+docker commit 181192/ml:gpu
 ```
 There, you shall now have compiled xgboost and commited your changes to the docker image and tagged it.
 You can know stop the container and restart it again as you please because the state is saved.
