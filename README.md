@@ -2,15 +2,15 @@
 A Docker Machine Learning Python enviroment.
 
 ## Index
-- [Module list](https://github.com/181192/P030-MLDockerEnv#module-list)
-- [Setup](https://github.com/181192/P030-MLDockerEnv#setup)
-- [How to run](https://github.com/181192/P030-MLDockerEnv#how-to-run)
-  - [First option - `docker run`](https://github.com/181192/P030-MLDockerEnv#first-option---docker-run)
-  - [Second option - `docker-compose up`](https://github.com/181192/P030-MLDockerEnv#second-option---docker-compose-up)
-  - [Third option - `./start.sh`](https://github.com/181192/P030-MLDockerEnv#third-option---startsh)
-- [Running Jupyter Notebook or Jupyter Lab](https://github.com/181192/P030-MLDockerEnv#running-jupyter-notebook-or-jupyter-lab)
-- [Further development and customization](https://github.com/181192/P030-MLDockerEnv#further-development-and-customization)
-- [GPU support for xgboost](https://github.com/181192/P030-MLDockerEnv#gpu-support-for-xgboost)
+- [Module list](#module-list)
+- [Setup](#setup)
+- [How to run](#how-to-run)
+  - [First option - `docker run`](#first-option---docker-run)
+  - [Second option - `docker-compose up`](#second-option---docker-compose-up)
+  - [Third option - `./start.sh`](#third-option---startsh)
+- [Running Jupyter Notebook or Jupyter Lab](#running-jupyter-notebook-or-jupyter-lab)
+- [Further development and customization](#further-development-and-customization)
+- [GPU support for xgboost](#gpu-support-for-xgboost)
 
 
 ## Module list
@@ -126,7 +126,7 @@ For running GPU version you will need `nvidia-docker` installed, installation gu
 ```bash
 nvidia-docker run --rm -it -p 8888:8888 --ipc=host --net=host -v /your-dir:/root/your-dir 181192/ml:gpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
 ```
-Or just pass along `--runtime=nvidia` then you don't need `nvidia-docker`:
+You can still use the docker command after installing `nvidia-docker` then you have to pass along `--runtime=nvidia`:
 ```bash
 docker run --rm -it -p 8888:8888 --runtime=nvidia --ipc=host --net=host -v /your-dir:/root/your-dir 181192/ml:gpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'
 ```
