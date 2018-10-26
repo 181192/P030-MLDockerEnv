@@ -134,6 +134,22 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
         jupyterlab \
         && \
 
+
+
+# ==================================================================
+# xgboost
+# ------------------------------------------------------------------
+    pip uninstall xgboost -y \
+    && git clone --recursive https://github.com/dmlc/xgboost \
+    && git submodule init \
+    && git submodule update \
+    && cd xgboost \
+    && mkdir build \
+    && cd build \
+    && cmake .. -DUSE_CUDA=ON \
+    && make -j4 \
+    && \
+
 # ==================================================================
 # mxnet
 # ------------------------------------------------------------------
