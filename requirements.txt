@@ -1,3 +1,6 @@
+##### Kaggle
+kaggle==1.4.7.1
+
 ##### Core scientific packages
 jupyter==1.0.0
 matplotlib==2.2.2
@@ -9,7 +12,7 @@ Cython==0.28.5
 
 
 ##### Machine Learning packages
-scikit-learn==0.19.1
+scikit-learn==0.20.0
 
 # Optional: the XGBoost library is only used in the ensemble learning chapter.
 xgboost==0.71
