@@ -50,13 +50,6 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
         && \
 
 # ==================================================================
-# Python requirements packages
-# ------------------------------------------------------------------
-
-    pip install --upgrade -r requirements.txt \
-      && \
-
-# ==================================================================
 # torch
 # ------------------------------------------------------------------
 
@@ -338,5 +331,13 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
     apt-get clean && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* ~/*
+
+
+# ==================================================================
+# Python requirements packages
+# ------------------------------------------------------------------
+
+RUN pip install --upgrade -r requirements.txt
+
 
 EXPOSE 8888 6006
