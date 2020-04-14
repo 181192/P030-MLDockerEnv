@@ -51,7 +51,7 @@ numexpr==2.6.5
 
 # Optional: these libraries can be useful in the classification chapter,
 # exercise 4.
-nltk==3.3
+nltk==3.4.5
 urlextract==0.8.3
 
 # Optional: this extension is handy to easily start/stop tensorboard
