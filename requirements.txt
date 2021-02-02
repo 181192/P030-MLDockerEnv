@@ -21,7 +21,7 @@ xgboost==0.71
 ##### Deep Learning packages
 # Forcing bleach to 1.5 to avoid version incompatibility when installing
 # TensorBoard.
-bleach==3.1.4
+bleach==3.3.0
 
 Keras==2.1.6
 
